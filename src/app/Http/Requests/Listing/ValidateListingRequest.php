@@ -5,7 +5,7 @@ namespace App\Http\Requests\Listing;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateListingRequest extends FormRequest
+class ValidateListingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

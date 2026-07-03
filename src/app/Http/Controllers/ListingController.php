@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Listing\CreateListingRequest;
+use App\Http\Requests\Listing\ValidateListingRequest;
 use App\Models\Listing;
 
 class ListingController extends Controller
@@ -38,10 +38,30 @@ class ListingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateListingRequest $request)
+    public function store(ValidateListingRequest $request)
     {
         Listing::create($request->validated());
 
         return redirect()->route('listing.index')->with('success', 'Listing created successfully.');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Listing $listing)
+    {
+        return inertia('Listing/Edit', [
+            'listing' => $listing
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(ValidateListingRequest $request, Listing $listing)
+    {
+        $listing->update($request->validated());
+
+        return redirect()->route('listing.index')->with('success', 'Listing updated successfully.');
     }
 }
