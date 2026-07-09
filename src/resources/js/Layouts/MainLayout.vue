@@ -25,10 +25,10 @@
 </template>
 
 <script setup>
-import { Link, usePage } from '@inertiajs/vue3';
-import { computed } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3'
+import { computed } from 'vue'
 
 // Get the flash success message from the server-side session
-const page = usePage();
-const flashSuccess = computed(() => page.props.flash?.success);
+const page = usePage()
+const flashSuccess = computed(() => page.props.flash?.success)
 </script>

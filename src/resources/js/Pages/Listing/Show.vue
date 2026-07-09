@@ -11,8 +11,8 @@
 </template>
 
 <script setup>
-import ListingAddress from '@/Components/Listing/ListingAddress.vue';
-import { Link } from '@inertiajs/vue3';
+import ListingAddress from '@/Components/Listing/ListingAddress.vue'
+import { Link } from '@inertiajs/vue3'
 defineProps({
     listing: Object
 })
