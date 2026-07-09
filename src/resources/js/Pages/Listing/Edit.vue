@@ -4,7 +4,7 @@
             <div class="col-span-4">
                 <label class="label">Beds</label>
                 <input v-model.number="form.beds" type="number" class="input" />
-                <div v-if="form.errors.beds" v-text="form.errors.beds" class=""></div>
+                <div v-if="form.errors.beds" v-text="form.errors.beds" class="input-error"></div>
             </div>
 
             <div class="col-span-4">
