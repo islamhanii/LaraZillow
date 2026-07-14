@@ -25,4 +25,14 @@ class AuthController extends Controller
 
         return redirect()->intended();
     }
+
+    public function destroy()
+    {
+        Auth::logout();
+
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect()->route('listing.index');
+    }
 }
