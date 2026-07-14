@@ -15,7 +15,7 @@
         </div>
     </header>
 
-    <main class="container mx-auto p-4">
+    <main class="container mx-auto p-4 w-full">
         <div v-if="flashSuccess"
             class="rounded-md shadow-sm mb-4 border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900 px-4 py-3"
             role="alert">
