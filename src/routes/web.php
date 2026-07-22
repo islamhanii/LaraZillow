@@ -11,3 +11,5 @@ Route::post('/login', [Controllers\AuthController::class, 'store'])->name('login
 Route::delete('/logout', [Controllers\AuthController::class, 'destroy'])->name('logout');
 
 Route::resource('listing', Controllers\ListingController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
+
+Route::resource('user-account', Controllers\UserAccountController::class)->only(['create', 'store']);

@@ -15,7 +15,8 @@
                         class="text-red-500 hover:text-red-700 cursor-pointer">
                         Logout</Link>
                 </div>
-                <div v-else>
+                <div v-else class="flex items-center gap-4">
+                    <Link :href="route('user-account.create')" class="dark:text-white">Register</Link>
                     <Link :href="route('login')" class="dark:text-white">Login</Link>
                 </div>
             </nav>
