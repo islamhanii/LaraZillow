@@ -4,9 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Listing\ValidateListingRequest;
 use App\Models\Listing;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class ListingController extends Controller
+class ListingController extends Controller implements HasMiddleware
 {
+    /**
+     * Get the middleware for the controller.
+     */
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('auth', except: ['index', 'show']),
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
