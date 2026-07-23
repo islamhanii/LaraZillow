@@ -29,4 +29,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the listings owned by the user.
+     */
+    public function listings()
+    {
+        return $this->hasMany(Listing::class, 'user_id');
+    }
 }
