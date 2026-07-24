@@ -16,6 +16,13 @@ class ListingController extends Controller implements HasMiddleware
     {
         return [
             new Middleware('auth', except: ['index', 'show']),
+
+            // Map policy methods via 'can' middleware:
+            new Middleware('can:viewAny,' . Listing::class, only: ['index']),
+            new Middleware('can:view,listing', only: ['show']),
+            new Middleware('can:create,' . Listing::class, only: ['create', 'store']),
+            new Middleware('can:update,listing', only: ['edit', 'update']),
+            new Middleware('can:delete,listing', only: ['destroy']),
         ];
     }
 
