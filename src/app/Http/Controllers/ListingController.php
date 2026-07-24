@@ -59,7 +59,7 @@ class ListingController extends Controller implements HasMiddleware
      */
     public function store(ValidateListingRequest $request)
     {
-        Listing::create($request->validated());
+        $request->user()->listings()->create($request->validated());
 
         return redirect()->route('listing.index')->with('success', 'Listing created successfully.');
     }
