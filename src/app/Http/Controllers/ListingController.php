@@ -32,7 +32,7 @@ class ListingController extends Controller implements HasMiddleware
     public function index()
     {
         return inertia('Listing/Index', [
-            'listings' => Listing::all()
+            'listings' => Listing::OrderByDesc('created_at')->paginate(12)
         ]);
     }
 
