@@ -32,7 +32,8 @@ class ListingController extends Controller implements HasMiddleware
     public function index()
     {
         return inertia('Listing/Index', [
-            'listings' => Listing::OrderByDesc('created_at')->paginate(10)
+            'filters' => request()->only(['priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo']),
+            'listings' => Listing::OrderByDesc('created_at')->paginate(10)->withQueryString()
         ]);
     }
 
