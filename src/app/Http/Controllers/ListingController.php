@@ -21,8 +21,7 @@ class ListingController extends Controller implements HasMiddleware
             new Middleware('can:viewAny,' . Listing::class, only: ['index']),
             new Middleware('can:view,listing', only: ['show']),
             new Middleware('can:create,' . Listing::class, only: ['create', 'store']),
-            new Middleware('can:update,listing', only: ['edit', 'update']),
-            new Middleware('can:delete,listing', only: ['destroy']),
+            new Middleware('can:update,listing', only: ['edit', 'update'])
         ];
     }
 
@@ -85,15 +84,5 @@ class ListingController extends Controller implements HasMiddleware
         $listing->update($request->validated());
 
         return redirect()->route('listing.index')->with('success', 'Listing updated successfully.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Listing $listing)
-    {
-        $listing->delete();
-
-        return redirect()->route('listing.index')->with('success', 'Listing deleted successfully.');
     }
 }
