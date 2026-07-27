@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Support\Facades\Auth;
 
 class RealtorListingController extends Controller implements HasMiddleware
 {
@@ -16,6 +17,8 @@ class RealtorListingController extends Controller implements HasMiddleware
 
     public function index()
     {
-        return inertia('Realtor/Index');
+        return inertia('Realtor/Index', [
+            'listings' => Auth::user()->listings,
+        ]);
     }
 }
