@@ -1,7 +1,7 @@
 <template>
     <h1 class="text-3xl mb-4">Your Listings</h1>
-    <section class="mb-8">
-        Filters
+    <section>
+        <Filters />
     </section>
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-2">
         <Box v-for="listing in listings" :key="listing.id">
@@ -28,6 +28,7 @@
 import ListingAddress from '@/Components/Listing/ListingAddress.vue'
 import Price from '@/Components/Listing/Price.vue'
 import ListingSpace from '@/Components/Listing/ListingSpace.vue'
+import Filters from '@/Components/Realtor/Filters.vue'
 import Box from '@/Components/UI/Box.vue'
 
 import { Link } from '@inertiajs/vue3'

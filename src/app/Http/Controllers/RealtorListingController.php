@@ -25,8 +25,12 @@ class RealtorListingController extends Controller implements HasMiddleware
      */
     public function index()
     {
+        $filters = [
+            'deleted' => request()->boolean('deleted')
+        ];
+
         return inertia('Realtor/Index', [
-            'listings' => Auth::user()->listings,
+            'listings' => Auth::user()->listings()->mostRecent()->filter($filters)->get(),
         ]);
     }
 
