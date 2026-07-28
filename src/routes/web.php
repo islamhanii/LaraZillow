@@ -15,5 +15,6 @@ Route::resource('listing', Controllers\ListingController::class)->only(['index',
 Route::resource('user-account', Controllers\UserAccountController::class)->only(['create', 'store']);
 
 Route::prefix('realtor')->name('realtor.')->group(function () {
-    Route::resource('listing', Controllers\RealtorListingController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    Route::resource('listing', Controllers\RealtorListingController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])->withTrashed();
+    Route::put('listing/{listing}/restore', [Controllers\RealtorListingController::class, 'restore'])->name('listing.restore')->withTrashed();
 });

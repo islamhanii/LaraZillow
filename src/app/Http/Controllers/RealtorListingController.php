@@ -86,4 +86,14 @@ class RealtorListingController extends Controller implements HasMiddleware
 
         return redirect()->back()->with('success', 'Listing deleted successfully.');
     }
+
+    /**
+     * Restore the specified resource from storage.
+     */
+    public function restore(Listing $listing)
+    {
+        $listing->restore();
+
+        return redirect()->back()->with('success', 'Listing restored successfully.');
+    }
 }

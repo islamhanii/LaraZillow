@@ -4,9 +4,9 @@
         <Filters :filters="filters" />
     </section>
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-2">
-        <Box v-for="listing in listings.data" :key="listing.id">
+        <Box v-for="listing in listings.data" :key="listing.id" :class="{ 'border-dashed': listing.deleted_at }">
             <div class="flex flex-col md:flex-row gap-2 md:items-center justify-between">
-                <div>
+                <div :class="{ 'opacity-25': listing.deleted_at }">
                     <div class="xl:flex items-center gap-2">
                         <Price :price="listing.price" class="text-2xl font-medium" />
                         <ListingSpace :listing="listing" />
@@ -20,8 +20,10 @@
                     </a>
                     <Link class="btn-outline text-xs font-medium"
                         :href="route('realtor.listing.edit', { listing: listing.id })">Edit</Link>
-                    <Link :href="route('realtor.listing.destroy', { listing: listing.id })" as="button" method="delete"
-                        class="btn-outline text-xs font-medium">Delete</Link>
+                    <Link v-if="!listing.deleted_at" :href="route('realtor.listing.destroy', { listing: listing.id })"
+                        as="button" method="delete" class="btn-outline text-xs font-medium">Delete</Link>
+                    <Link v-else :href="route('realtor.listing.restore', { listing: listing.id })" as="button"
+                        method="put" class="btn-outline text-xs font-medium">Restore</Link>
                 </div>
             </div>
         </Box>
