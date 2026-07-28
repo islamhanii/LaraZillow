@@ -72,6 +72,6 @@ const form = useForm({
 })
 
 const createListing = () => {
-    form.post(route('listing.store'))
+    form.post(route('realtor.listing.store'))
 }
 </script>
