@@ -13,6 +13,8 @@ class Listing extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $sortable = ['price', 'created_at'];
+
     /**
      * Get the owner of the listing.
      */
@@ -20,6 +22,7 @@ class Listing extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
 
     public function scopeMostRecent(Builder $query): Builder
     {
@@ -35,6 +38,7 @@ class Listing extends Model
             ->when($filters['baths'] ?? false, fn($query, $value) => $query->where('baths', (int)$value < 6 ? '=' : '>=', $value))
             ->when($filters['areaFrom'] ?? false, fn($query, $value) => $query->where('area', '>=', $value))
             ->when($filters['areaTo'] ?? false, fn($query, $value) => $query->where('area', '<=', $value))
-            ->when($filters['deleted'] ?? false, fn($query) => $query->withTrashed());
+            ->when($filters['deleted'] ?? false, fn($query) => $query->withTrashed())
+            ->when($filters['by'] ?? false, fn($query, $value) => !in_array($value, $this->sortable) ? $query : $query->orderBy($value, $filters['order'] ?? 'desc'));
     }
 }
