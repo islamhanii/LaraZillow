@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Listing;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+class RealtorListingImageController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function create(Listing $listing)
+    {
+        return inertia('Realtor/ListingImage/Create', [
+            'listing' => $listing
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request, Listing $listing)
+    {
+        if ($request->hasFile('images')) {
+            $paths = [];
+            foreach ($request->file('images') as $file) {
+                $path = Storage::disk('public')->putFile('images', $file);
+                $paths[] = ['file_name' => $path];
+            }
+
+            $listing->images()->createMany($paths);
+        }
+
+        return redirect()->back()->with('success', 'Images uploaded successfully.');
+    }
+}
