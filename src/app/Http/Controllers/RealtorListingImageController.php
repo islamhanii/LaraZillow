@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Listing\UploadListingImagesRequest;
 use App\Models\Listing;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class RealtorListingImageController extends Controller
@@ -21,7 +21,7 @@ class RealtorListingImageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Listing $listing)
+    public function store(UploadListingImagesRequest $request, Listing $listing)
     {
         if ($request->hasFile('images')) {
             $paths = [];
