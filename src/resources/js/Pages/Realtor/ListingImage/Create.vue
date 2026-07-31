@@ -22,9 +22,17 @@ import Box from '@/Components/UI/Box.vue'
 
 import { useForm } from '@inertiajs/vue3'
 import { computed, ref } from 'vue'
+import { Inertia } from '@inertiajs/inertia'
+import nProgress from 'nprogress'
 
 const props = defineProps({
     listing: Object
+})
+
+Inertia.on('progress', (event) => {
+    if (event.detail.progress.percentage) {
+        nProgress.set((event.detail.progress.percentage / 100) * 0.9)
+    }
 })
 
 const fileInput = ref(null)
@@ -45,6 +53,7 @@ const imageError = computed(() => {
 
 const upload = () => {
     uploadForm.post(route('realtor.listing.image.store', { listing: props.listing }), {
+        forceFormData: true,
         onSuccess: () => {
             reset()
         }

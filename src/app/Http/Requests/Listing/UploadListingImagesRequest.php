@@ -25,7 +25,7 @@ class UploadListingImagesRequest extends FormRequest
     {
         return [
             'images' => 'required|array|min:1|max:5',
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,webp|max:10240',
         ];
     }
 
