@@ -4,10 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Listing\UploadListingImagesRequest;
 use App\Models\Listing;
+use App\Models\ListingImage;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
 
 class RealtorListingImageController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
+    public function middleware(): array
+    {
+        return [
+            'auth',
+            new Middleware('can:create,listingImage', only: ['create', 'store']),
+            new Middleware('can:delete,listingImage', only: ['destroy'])
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -38,5 +52,16 @@ class RealtorListingImageController extends Controller
         }
 
         return redirect()->back()->with('success', 'Images uploaded successfully.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($listing, ListingImage $image)
+    {
+        Storage::disk('public')->delete($image->file_name);
+        $image->delete();
+
+        return redirect()->back()->with('success', 'Image deleted successfully.');
     }
 }
