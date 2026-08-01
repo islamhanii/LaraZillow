@@ -24,7 +24,7 @@
         </div>
         <div v-else class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div v-for="image in listing.images" :key="image.id" class="flex flex-col justify-between">
-                <img :src="image.url" alt="image" class="rounded-md w-full h-100 object-cover">
+                <img :src="image.url" alt="Listing Image" class="rounded-md w-full h-100 object-cover">
                 <Link :href="route('realtor.listing.image.destroy', { listing: props.listing.id, image: image.id })"
                     method="delete" as="button" class="mt-2 btn-outline text-xs font-medium">Delete</Link>
             </div>

@@ -34,7 +34,7 @@ class RealtorListingController extends Controller implements HasMiddleware
         ];
 
         return inertia('Realtor/Index', [
-            'listings' => Auth::user()->listings()->filter($filters)->paginate(10)->withQueryString(),
+            'listings' => Auth::user()->listings()->withCount('images')->filter($filters)->paginate(10)->withQueryString(),
             'filters' => $filters
         ]);
     }

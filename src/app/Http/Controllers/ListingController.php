@@ -24,6 +24,12 @@ class ListingController extends Controller
      */
     public function show(Listing $listing)
     {
+        $listing->load([
+            'images' => function ($query) {
+                $query->select('listing_id', 'file_name')->orderBy('created_at', 'desc');
+            }
+        ]);
+
         return inertia('Listing/Show', [
             'listing' => $listing
         ]);
