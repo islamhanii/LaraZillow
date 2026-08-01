@@ -13,6 +13,10 @@ class RealtorListingImageController extends Controller
      */
     public function create(Listing $listing)
     {
+        $listing->load([
+            'images' => fn($query) => $query->select('id', 'listing_id', 'file_name')->orderBy('created_at', 'desc'),
+        ]);
+
         return inertia('Realtor/ListingImage/Create', [
             'listing' => $listing
         ]);

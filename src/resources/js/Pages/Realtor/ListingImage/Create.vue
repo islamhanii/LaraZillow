@@ -2,18 +2,31 @@
     <Box>
         <template #header>Upload New Images</template>
         <form @submit.prevent="upload">
-            <section class="flex items-start gap-2 my-4">
+            <section class="flex items-start flex-wrap gap-2 my-4">
                 <div class="mr-4">
                     <input
                         class="border rounded-md file:px-4 file:py-2 border-gray-200 dark:border-gray-700 file:text-gray-700 file:dark:text-gray-400 file:border-0 file:bg-gray-100 file:dark:bg-gray-800 file:font-medium file:hover:bg-gray-200 file:dark:hover:bg-gray-700 file:cursor-pointer"
                         type="file" ref="fileInput" @input="addFiles" multiple>
                     <div v-if="imageError" v-text="imageError" class="input-error"></div>
                 </div>
-                <button type="submit" class="btn-outline disabled:opacity-25 disabled:cursor-not-allowed"
-                    :disabled="!canUpload">Upload</button>
-                <button type="reset" class="btn-outline" @click="reset">Reset</button>
+                <div class="flex gap-2">
+                    <button type="submit" class="btn-outline disabled:opacity-25 disabled:cursor-not-allowed"
+                        :disabled="!canUpload">Upload</button>
+                    <button type="reset" class="btn-outline" @click="reset">Reset</button>
+                </div>
             </section>
         </form>
+    </Box>
+    <Box class="mt-4">
+        <template #header>Uploaded Images</template>
+        <div v-if="listing.images.length === 0" class="mt-4 text-center text-gray-700 dark:text-gray-400">
+            No images uploaded yet.
+        </div>
+        <div v-else class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div v-for="image in listing.images" :key="image.id" class="relative">
+                <img :src="image.url" alt="image" class="rounded-md w-full h-100 object-cover">
+            </div>
+        </div>
     </Box>
 </template>
 
