@@ -5,20 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Listing\UploadListingImagesRequest;
 use App\Models\Listing;
 use App\Models\ListingImage;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
 
-class RealtorListingImageController extends Controller
+class RealtorListingImageController extends Controller implements HasMiddleware
 {
     /**
      * Display a listing of the resource.
      */
-    public function middleware(): array
+    public static function middleware(): array
     {
         return [
             'auth',
-            new Middleware('can:create,listingImage', only: ['create', 'store']),
-            new Middleware('can:delete,listingImage', only: ['destroy'])
+            new Middleware('can:create,' . ListingImage::class . ',listing', only: ['create', 'store']),
+            new Middleware('can:delete,image', only: ['destroy'])
         ];
     }
 

@@ -3,11 +3,11 @@
 namespace App\Policies;
 
 use App\Models\Listing;
-use App\Models\ListingImage;
+use App\Models\Offer;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class ListingImagePolicy
+class OfferPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -20,7 +20,7 @@ class ListingImagePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, ListingImage $listingImage): bool
+    public function view(User $user, Offer $offer): bool
     {
         return true;
     }
@@ -28,40 +28,42 @@ class ListingImagePolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user, Listing $listing): bool
+    public function create(User $user, Listing $listing): Response
     {
-        return $user->id === $listing->user_id;
+        return $user->id !== $listing->user_id
+            ? Response::allow()
+            : Response::deny('You cannot make an offer on your own listing.');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ListingImage $listingImage): bool
+    public function update(User $user, Offer $offer): bool
     {
-        return $user->id === $listingImage->listing->user_id;
+        return true;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, ListingImage $listingImage): bool
+    public function delete(User $user, Offer $offer): bool
     {
-        return $user->id === $listingImage->listing->user_id;
+        return true;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, ListingImage $listingImage): bool
+    public function restore(User $user, Offer $offer): bool
     {
-        return $user->id === $listingImage->listing->user_id;
+        return true;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, ListingImage $listingImage): bool
+    public function forceDelete(User $user, Offer $offer): bool
     {
-        return $user->id === $listingImage->listing->user_id;
+        return true;
     }
 }
