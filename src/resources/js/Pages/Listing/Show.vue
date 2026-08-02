@@ -29,6 +29,7 @@
                     <label class="label">Interest Rate ({{ interestRate }}%)</label>
                     <input v-model.number="interestRate" type="range" min="0.1" max="30" step="0.1"
                         class="w-full bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer">
+
                     <label class="label">Duration ({{ duration }} years)</label>
                     <input v-model.number="duration" type="range" min="3" max="25" step="1"
                         class="w-full bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer">
@@ -54,6 +55,7 @@
                     </div>
                 </div>
             </Box>
+            <MakeOffer :listing-id="listing.id" :price="listing.price" />
         </div>
     </div>
 </template>
@@ -61,6 +63,7 @@
 <script setup>
 import ListingAddress from '@/Components/Listing/ListingAddress.vue'
 import ListingSpace from '@/Components/Listing/ListingSpace.vue'
+import MakeOffer from '@/Components/Listing/MakeOffer.vue'
 import Price from '@/Components/Listing/Price.vue'
 import Box from '@/Components/UI/Box.vue'
 
