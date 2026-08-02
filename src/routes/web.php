@@ -12,10 +12,12 @@ Route::delete('/logout', [Controllers\AuthController::class, 'destroy'])->name('
 
 Route::resource('listing', Controllers\ListingController::class)->only(['index', 'show']);
 
+Route::resource('listing.offer', Controllers\ListingOfferController::class)->only(['store']);
+
 Route::resource('user-account', Controllers\UserAccountController::class)->only(['create', 'store']);
 
 Route::prefix('realtor')->name('realtor.')->group(function () {
     Route::resource('listing', Controllers\RealtorListingController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])->withTrashed();
     Route::put('listing/{listing}/restore', [Controllers\RealtorListingController::class, 'restore'])->name('listing.restore')->withTrashed();
-    Route::resource('listing.image', Controllers\RealtorListingImageController::class)->only(['create', 'store', 'destroy'])->scoped();
+    Route::resource('listing.image', Controllers\RealtorListingImageController::class)->only(['create', 'store', 'destroy']);
 });
