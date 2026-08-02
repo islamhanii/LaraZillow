@@ -37,4 +37,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Listing::class, 'user_id');
     }
+
+    /**
+     * Get the offers made by the user.
+     */
+    public function offers()
+    {
+        return $this->hasMany(Offer::class, 'bidder_id');
+    }
 }

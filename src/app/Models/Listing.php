@@ -23,16 +23,33 @@ class Listing extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * Get the images associated with the listing.
+     */
     public function images()
     {
         return $this->hasMany(ListingImage::class);
     }
 
+    /**
+     * Get the offers associated with the listing.
+     */
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
+
+    /**
+     * Scope a query to order listings by most recent.
+     */
     public function scopeMostRecent(Builder $query): Builder
     {
         return $query->orderBy('created_at', 'desc');
     }
 
+    /**
+     * Scope a query to filter listings based on provided criteria.
+     */
     public function scopeFilter(Builder $query, array $filters): Builder
     {
         return $query

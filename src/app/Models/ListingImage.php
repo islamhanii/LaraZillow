@@ -12,12 +12,17 @@ use Illuminate\Support\Facades\Storage;
 #[Appends('url')]
 class ListingImage extends Model
 {
-
+    /**
+     * Get the listing that owns the image.
+     */
     public function listing()
     {
         return $this->belongsTo(Listing::class);
     }
 
+    /**
+     * Get the URL of the image.
+     */
     public function url(): Attribute
     {
         return Attribute::make(
