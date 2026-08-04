@@ -55,7 +55,9 @@
                     </div>
                 </div>
             </Box>
-            <MakeOffer v-if="user" @offer-updated="offer = $event" :listing-id="listing.id" :price="listing.price" />
+            <MakeOffer v-if="user && !offerMade" @offer-updated="offer = $event" :listing-id="listing.id"
+                :price="listing.price" />
+            <OfferMade v-if="user && offerMade" :offer-made="offerMade" />
         </div>
     </div>
 </template>
@@ -64,6 +66,7 @@
 import ListingAddress from '@/Components/Listing/ListingAddress.vue'
 import ListingSpace from '@/Components/Listing/ListingSpace.vue'
 import MakeOffer from '@/Components/Listing/MakeOffer.vue'
+import OfferMade from '@/Components/Listing/OfferMade.vue'
 import Price from '@/Components/Listing/Price.vue'
 import Box from '@/Components/UI/Box.vue'
 
@@ -75,7 +78,8 @@ import { computed } from 'vue'
 import { ref } from 'vue'
 
 const props = defineProps({
-    listing: Object
+    listing: Object,
+    offerMade: Object
 })
 
 const offer = ref(props.listing.price)

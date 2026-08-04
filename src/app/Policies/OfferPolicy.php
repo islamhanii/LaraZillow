@@ -30,9 +30,9 @@ class OfferPolicy
      */
     public function create(User $user, Listing $listing): Response
     {
-        return $user->id !== $listing->user_id
+        return $user->id !== $listing->user_id && !$listing->offers()->byMe()->exists()
             ? Response::allow()
-            : Response::deny('You cannot make an offer on your own listing.');
+            : Response::deny('You cannot make an offer on your own listing or if you have already made an offer.');
     }
 
     /**
