@@ -65,8 +65,8 @@
 <script setup>
 import ListingAddress from '@/Components/Listing/ListingAddress.vue'
 import ListingSpace from '@/Components/Listing/ListingSpace.vue'
-import MakeOffer from '@/Components/Listing/MakeOffer.vue'
-import OfferMade from '@/Components/Listing/OfferMade.vue'
+import MakeOffer from '@/Components/Offer/MakeOffer.vue'
+import OfferMade from '@/Components/Offer/OfferMade.vue'
 import Price from '@/Components/Listing/Price.vue'
 import Box from '@/Components/UI/Box.vue'
 

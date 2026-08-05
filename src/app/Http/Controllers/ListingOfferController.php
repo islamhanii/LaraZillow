@@ -10,6 +10,9 @@ use Illuminate\Routing\Controllers\Middleware;
 
 class ListingOfferController extends Controller implements HasMiddleware
 {
+    /**
+     * Get the middleware for the controller.
+     */
     public static function middleware(): array
     {
         return [

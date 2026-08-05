@@ -34,8 +34,18 @@ class RealtorListingController extends Controller implements HasMiddleware
         ];
 
         return inertia('Realtor/Index', [
-            'listings' => Auth::user()->listings()->withCount('images')->filter($filters)->paginate(10)->withQueryString(),
+            'listings' => Auth::user()->listings()->withCount('images')->withCount('offers')->filter($filters)->paginate(10)->withQueryString(),
             'filters' => $filters
+        ]);
+    }
+
+    /**
+     * Display the offers for the specified resource.
+     */
+    public function show(Listing $listing)
+    {
+        return inertia('Realtor/Show', [
+            'listing' => $listing->load('offers.bidder'),
         ]);
     }
 
